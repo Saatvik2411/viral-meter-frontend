@@ -19,15 +19,19 @@ function Signup() {
   // Step 1: Send OTP
   const sendOtp = async () => {
     try {
-      const res = await fetch("http://localhost:5000/api/users/signup/send-otp", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          username: form.username,
-          email: form.email,
-          password: form.password,
-        }),
-      });
+     const res = await fetch(
+  `${process.env.REACT_APP_API_URL}/api/users/signup/send-otp`,
+  {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      username: form.username,
+      email: form.email,
+      password: form.password,
+    }),
+  }
+);
+
       const data = await res.json();
       if (res.ok) {
         setMessage(data.message);
