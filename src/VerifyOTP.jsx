@@ -13,9 +13,13 @@ function VerifyOtp() {
     if (!email) return alert("Email not found. Please sign up again.");
 
     try {
-      await axios.post("http://localhost:5000/verify-otp", { email, otp });
-      alert("OTP verified! You can now login.");
-      navigate("/login");
+      await axios.post(
+  `${process.env.REACT_APP_API_URL}/api/users/signup/verify-otp`,
+  { email, otp }
+);
+alert("OTP verified! You can now login.");
+navigate("/login");
+
     } catch (error) {
       alert(error.response?.data?.error || "OTP verification failed.");
     }
