@@ -20,12 +20,17 @@ function Dashboard() {
     try {
       const token = localStorage.getItem("token");
 
-      const res = await axios.post("http://localhost:5000/predict", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const res = await axios.post(
+  `${process.env.REACT_APP_API_URL}/predict`,
+  formData,
+  {
+    headers: {
+      "Content-Type": "multipart/form-data",
+      Authorization: `Bearer ${token}`,
+    },
+  }
+);
+
 
       setPrediction(res.data.prediction || "No prediction returned.");
     } catch (error) {
