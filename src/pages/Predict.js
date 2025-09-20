@@ -22,13 +22,17 @@ export default function PredictionForm({ token }) {
     formData.append("caption", caption);
 
     try {
-      const response = await fetch("http://localhost:5000/predict", {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${token}`, // send JWT token
-        },
-        body: formData,
-      });
+      const response = await fetch(
+  `${process.env.REACT_APP_API_URL}/predict`,
+  {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${token}`, // send JWT token
+    },
+    body: formData,
+  }
+);
+
 
       if (!response.ok) {
         const err = await response.json();
